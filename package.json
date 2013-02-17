@@ -1,0 +1,15 @@
+{
+  "name": "builder-coffeescript",
+  "version": "0.0.1",
+  "description": "Coffeescript plugin for component-build",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "dependencies": {
+    "coffee-script": "*"
+  },
+  "repository": "",
+  "author": "Anthony Short",
+  "license": "BSD"
+}
