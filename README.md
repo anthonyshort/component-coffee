@@ -2,6 +2,14 @@
 
 Component plugin to compile CoffeeScript files on-the-fly. This allows you to write components in CoffeeScript.
 
+## Installation
+
+```
+npm install component-coffee
+```
+
+## Usage
+
 ```
 component build --use component-coffee
 ```
