@@ -1,7 +1,7 @@
 {
-  "name": "builder-coffeescript",
-  "version": "0.0.1",
-  "description": "Coffeescript plugin for component-build",
+  "name": "component-coffee",
+  "version": "0.1.0",
+  "description": "CoffeeScript plugin for Component",
   "main": "index.js",
   "scripts": {
     "test": ""

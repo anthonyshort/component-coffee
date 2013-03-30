@@ -1,23 +1,34 @@
-var coffee = require('coffee-script');
+var coffeescript = require('coffee-script');
 var path = require('path');
 var fs = require('fs');
 
-module.exports = function(builder) {
-  builder.hook('before scripts', function(pkg){
+function hook(pkg, next) {
 
-    pkg.conf.scripts.forEach(function(file, i, scripts){
-      if (path.extname(file) !== '.coffee') return;
-      var str = fs.readFileSync(file, 'utf8');
-      var compiled = coffee.compile(str, { filename : file, bare: true });
+  // Get all the coffee files from the scripts list
+  var coffee = pkg.conf.scripts.filter(function(file){
+    return path.extname(file) === '.coffee';
+  });
+
+  // No scripts
+  if( coffee.length === 0 ) return;
+
+  coffee.forEach(function(file, i){
+    fs.readFile(path.resolve(file), 'utf8', function(err, str){
+      if(err) throw new Error(err.toString());
+      var compiled = coffeescript.compile(str, { filename : file, bare: true });
       var filename = file.replace('.coffee', '.js');
       pkg.addFile('scripts', filename, compiled);
+      if(i === ( coffee.length - 1 )) next();
     });
-
-    // Remove all the coffee files from the scripts
-    pkg.conf.scripts = pkg.conf.scripts.filter(function(file){
-      return path.extname(file) !== '.coffee';
-    });
-
-    return pkg;
   });
+
+  // Remove all coffee files and replace with JS extension
+  pkg.conf.scripts = pkg.conf.scripts.map(function(file){
+    return ( path.extname(file) === '.coffee' ) ? file.replace('.coffee', '.js') : file;
+  });
+
+}
+
+module.exports = function(builder) {
+  builder.hook('before scripts', hook);
 };
