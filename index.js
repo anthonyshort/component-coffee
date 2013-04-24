@@ -6,7 +6,7 @@ module.exports = function(builder) {
   builder.hook('before scripts', function(pkg, next) {
 
     // Get all the coffee files from the scripts list
-    var coffee = pkg.conf.scripts.filter(function(file){
+    var coffee = pkg.config.scripts.filter(function(file){
       return path.extname(file) === '.coffee';
     });
 
