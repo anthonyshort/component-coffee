@@ -1,6 +1,6 @@
 {
   "name": "component-coffee",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "CoffeeScript plugin for Component",
   "main": "index.js",
   "scripts": {
@@ -11,5 +11,8 @@
   },
   "repository": "",
   "author": "Anthony Short",
-  "license": "BSD"
+  "license": "BSD",
+  "peerDependencies": {
+    "component": ">= 0.14"
+  }
 }
