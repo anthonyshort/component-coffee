@@ -5,6 +5,9 @@ var fs = require('fs');
 module.exports = function(builder) {
   builder.hook('before scripts', function(pkg, next) {
 
+    // No scripts field in the component.json file
+    if (pkg.config.scripts === undefined) return next();
+
     // Get all the coffee files from the scripts list
     var coffee = pkg.config.scripts.filter(function(file){
       return path.extname(file) === '.coffee';
