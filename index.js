@@ -20,9 +20,8 @@ module.exports = function(builder) {
       var realpath = pkg.path(file);
       var str = fs.readFileSync(realpath, 'utf8');
       var compiled = coffeescript.compile(str, { filename : realpath, bare: true });
-      var filename = file.replace('.coffee', '.js');
-      pkg.addFile('scripts', filename, compiled);
       pkg.removeFile('scripts', file);
+      pkg.addFile('scripts', file, compiled);
     });
 
     next();
