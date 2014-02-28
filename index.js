@@ -22,6 +22,9 @@ module.exports = function(builder) {
       var compiled = coffeescript.compile(str, { filename : realpath, bare: true });
       pkg.removeFile('scripts', file);
       pkg.addFile('scripts', file, compiled);
+      // This duplicates the code in the built package, but needed to be able to require
+      // modules without adding .coffee - a better solution is needed for production:
+      pkg.addFile('scripts', file.replace('.coffee', '.js'), compiled);
     });
 
     next();
